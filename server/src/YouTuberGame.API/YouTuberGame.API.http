@@ -1,0 +1,6 @@
+@YouTuberGame.API_HostAddress = http://localhost:5087
+
+GET {{YouTuberGame.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
