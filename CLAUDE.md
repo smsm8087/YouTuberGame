@@ -10,6 +10,7 @@
 - 2026-02-10: 프로젝트 초기 구조 생성 (Sonnet)
 - 2026-02-11: CLAUDE.md 추가 (Opus)
 - 2026-02-11: Network 모듈 추가 - 서버 통신 기반 구현 (Opus)
+- 2026-02-11: UI 스크립트 + AppEntry 추가 (Opus)
 
 ---
 ## 프로젝트 개요
@@ -68,13 +69,18 @@
   - `ContentApi.cs`: 콘텐츠 제작 시작/진행 조회/업로드
   - `GachaApi.cs`: 캐릭터 뽑기
   - `TrendApi.cs`: 일일 트렌드, 주간/채널파워 랭킹
-- UI, 씬, 프리팹은 아직 미구현
+- **UI 스크립트 구현 완료**:
+  - `LoginUI.cs`: 로그인/회원가입 UI, 자동 로그인, 입력 검증
+  - `MainStudioUI.cs`: 메인 화면, 채널 정보, 콘텐츠 제작/업로드, 하단 네비게이션
+  - `ContentProductionUI.cs`: 콘텐츠 제작 팝업 (장르 선택 → 팀원 배치 → 제작 시작)
+  - `AppEntry.cs`: 앱 진입점, 자동 로그인 판별 → 씬 전환
+- 씬, 프리팹은 Unity 에디터에서 작업 필요
 
 ## 다음 작업 (TODO)
-- 로그인/회원가입 UI
-- 메인 스튜디오 뷰 UI
-- 콘텐츠 제작 UI
-- Resources/ApiConfig ScriptableObject 에셋 생성 (Unity 에디터에서)
+- Unity 에디터: Login 씬, Main 씬 생성
+- Unity 에디터: UI 프리팹 생성 및 스크립트 연결
+- Unity 에디터: Resources/ApiConfig ScriptableObject 에셋 생성
+- 팀원 목록 UI, 장비 UI, 가챠 UI 스크립트
 
 ## 코드 컨벤션
 - C# 네이밍: PascalCase (public), _camelCase (private field)
