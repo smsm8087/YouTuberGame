@@ -9,6 +9,7 @@
 ## 변경 이력
 - 2026-02-10: 프로젝트 초기 구조 생성 (Sonnet)
 - 2026-02-11: CLAUDE.md 추가 (Opus)
+- 2026-02-11: Network 모듈 추가 - 서버 통신 기반 구현 (Opus)
 
 ---
 ## 프로젝트 개요
@@ -58,8 +59,22 @@
 - 데이터 모델 스캐폴딩 완료 (PlayerData, CharacterData, ContentData, EquipmentData)
 - 매니저 로직 스캐폴딩 완료 (DataManager, CharacterManager, ContentManager, EquipmentManager, StudioManager)
 - GameManager 싱글톤 구조 생성
+- **Network 모듈 구현 완료**:
+  - `ApiConfig.cs`: 서버 URL 설정 (ScriptableObject, 하드코딩 방지)
+  - `ApiClient.cs`: UnityWebRequest 기반 HTTP 통신, JWT 토큰 자동 첨부/저장
+  - `ApiResponse.cs`: 모든 API 요청/응답 DTO (Auth, Player, Gacha, Content, Equipment, Trend, Ranking)
+  - `AuthApi.cs`: 로그인/회원가입, 토큰 자동 저장
+  - `PlayerApi.cs`: 플레이어 데이터 CRUD, 캐릭터 레벨업, 장비 업그레이드, 스튜디오 업그레이드
+  - `ContentApi.cs`: 콘텐츠 제작 시작/진행 조회/업로드
+  - `GachaApi.cs`: 캐릭터 뽑기
+  - `TrendApi.cs`: 일일 트렌드, 주간/채널파워 랭킹
 - UI, 씬, 프리팹은 아직 미구현
-- 서버 연동 (Network/) 미구현
+
+## 다음 작업 (TODO)
+- 로그인/회원가입 UI
+- 메인 스튜디오 뷰 UI
+- 콘텐츠 제작 UI
+- Resources/ApiConfig ScriptableObject 에셋 생성 (Unity 에디터에서)
 
 ## 코드 컨벤션
 - C# 네이밍: PascalCase (public), _camelCase (private field)
