@@ -8,9 +8,10 @@
 
 ## 변경 이력
 - 2026-02-10: 프로젝트 초기 구조 생성 (Sonnet)
-- 2026-02-11: CLAUDE.md 추가 (Opus)
-- 2026-02-11: Network 모듈 추가 - 서버 통신 기반 구현 (Opus)
-- 2026-02-11: UI 스크립트 + AppEntry 추가 (Opus)
+- 2026-02-11: CLAUDE.md 추가 (Opus #1)
+- 2026-02-11: Network 모듈 추가 - 서버 통신 기반 구현 (Opus #1)
+- 2026-02-11: UI 스크립트 + AppEntry 추가 (Opus #1)
+- 2026-02-11: APIClient + LoginManager 통합 구현 (Opus #2)
 
 ---
 ## 프로젝트 개요
@@ -60,20 +61,16 @@
 - 데이터 모델 스캐폴딩 완료 (PlayerData, CharacterData, ContentData, EquipmentData)
 - 매니저 로직 스캐폴딩 완료 (DataManager, CharacterManager, ContentManager, EquipmentManager, StudioManager)
 - GameManager 싱글톤 구조 생성
-- **Network 모듈 구현 완료**:
-  - `ApiConfig.cs`: 서버 URL 설정 (ScriptableObject, 하드코딩 방지)
-  - `ApiClient.cs`: UnityWebRequest 기반 HTTP 통신, JWT 토큰 자동 첨부/저장
-  - `ApiResponse.cs`: 모든 API 요청/응답 DTO (Auth, Player, Gacha, Content, Equipment, Trend, Ranking)
-  - `AuthApi.cs`: 로그인/회원가입, 토큰 자동 저장
-  - `PlayerApi.cs`: 플레이어 데이터 CRUD, 캐릭터 레벨업, 장비 업그레이드, 스튜디오 업그레이드
-  - `ContentApi.cs`: 콘텐츠 제작 시작/진행 조회/업로드
-  - `GachaApi.cs`: 캐릭터 뽑기
-  - `TrendApi.cs`: 일일 트렌드, 주간/채널파워 랭킹
-- **UI 스크립트 구현 완료**:
-  - `LoginUI.cs`: 로그인/회원가입 UI, 자동 로그인, 입력 검증
-  - `MainStudioUI.cs`: 메인 화면, 채널 정보, 콘텐츠 제작/업로드, 하단 네비게이션
-  - `ContentProductionUI.cs`: 콘텐츠 제작 팝업 (장르 선택 → 팀원 배치 → 제작 시작)
-  - `AppEntry.cs`: 앱 진입점, 자동 로그인 판별 → 씬 전환
+- **Network 모듈 구현 완료 (통합)**:
+  - `Network/APIClient.cs`: 올인원 REST API 클라이언트
+    - 인증: Register, Login (JWT 토큰 자동 저장/로드)
+    - 플레이어: GetPlayerData, SavePlayerData
+    - 가챠: DrawGacha
+    - 캐릭터: GetAllCharacters, LevelUp, Breakthrough
+    - 콘텐츠: StartContent, GetProducing, Complete, Upload, History
+    - 모든 DTO 클래스 포함 (AuthResponse, GachaResponse, ContentResponse 등)
+- **UI 스크립트**:
+  - `UI/LoginManager.cs`: 로그인/회원가입 UI, 입력 검증, 자동 로그인
 - 씬, 프리팹은 Unity 에디터에서 작업 필요
 
 ## 다음 작업 (TODO)
