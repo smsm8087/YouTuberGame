@@ -12,6 +12,8 @@
 - 2026-02-11: Network 모듈 추가 - 서버 통신 기반 구현 (Opus #1)
 - 2026-02-11: UI 스크립트 + AppEntry 추가 (Opus #1)
 - 2026-02-11: APIClient + LoginManager 통합 구현 (Opus #2)
+- 2026-02-11: Unity 클라이언트 LoginScreen 구현 (Opus #3)
+- 2026-02-11: CharacterListUI 구현 - 캐릭터 목록, 필터링, 레벨업/돌파 UI (Sonnet 4.5)
 
 ---
 ## 프로젝트 개요
@@ -69,15 +71,18 @@
     - 캐릭터: GetAllCharacters, LevelUp, Breakthrough
     - 콘텐츠: StartContent, GetProducing, Complete, Upload, History
     - 모든 DTO 클래스 포함 (AuthResponse, GachaResponse, ContentResponse 등)
-- **UI 스크립트**:
-  - `UI/LoginManager.cs`: 로그인/회원가입 UI, 입력 검증, 자동 로그인
-- 씬, 프리팹은 Unity 에디터에서 작업 필요
+- **UI 스크립트 (완성)**:
+  - `UI/LoginUI.cs`: 로그인/회원가입 UI, 자동 로그인 지원
+  - `UI/MainStudioUI.cs`: 메인 스튜디오 화면
+  - `UI/ContentProductionUI.cs`: 콘텐츠 제작 UI
+  - `UI/CharacterListUI.cs`: 캐릭터 목록, 등급 필터, 상세 보기, 레벨업/돌파 UI
+- 씬, 프리팹은 Unity 에디터에서 작업 필요 (TextMeshPro, Button, InputField)
 
 ## 다음 작업 (TODO)
 - Unity 에디터: Login 씬, Main 씬 생성
-- Unity 에디터: UI 프리팹 생성 및 스크립트 연결
+- Unity 에디터: UI 프리팹 생성 및 스크립트 연결 (CharacterCard 프리팹 등)
 - Unity 에디터: Resources/ApiConfig ScriptableObject 에셋 생성
-- 팀원 목록 UI, 장비 UI, 가챠 UI 스크립트
+- 장비 UI, 가챠 UI 스크립트 (CharacterListUI 완료)
 
 ## 코드 컨벤션
 - C# 네이밍: PascalCase (public), _camelCase (private field)
