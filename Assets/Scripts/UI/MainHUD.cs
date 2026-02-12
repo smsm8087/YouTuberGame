@@ -92,6 +92,7 @@ public class MainHUD : UI_Base
 
     void OnDestroy()
     {
+        CancelInvoke();
         this.Unlisten(ObserverEvent.CurrencyChanged, RefreshPlayerData);
         this.Unlisten(ObserverEvent.ContentCompleted, RefreshPlayerData);
     }
