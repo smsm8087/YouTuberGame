@@ -14,6 +14,7 @@
 - 2026-02-11: APIClient + LoginManager 통합 구현 (Opus #2)
 - 2026-02-11: Unity 클라이언트 LoginScreen 구현 (Opus #3)
 - 2026-02-11: CharacterListUI 구현 - 캐릭터 목록, 필터링, 레벨업/돌파 UI (Sonnet 4.5)
+- 2026-02-12: 코드 정리 - 서버 레포 클라 코드를 클라 레포로 통합, 중복 제거 (Opus #1)
 
 ---
 ## 프로젝트 개요
@@ -30,7 +31,7 @@
 - **4대 스탯**: 촬영력, 편집력, 기획력, 디자인력 → 합산 = 채널 파워
 - **팀원**: 12~15명, 등급 C(60%)/B(25%)/A(12%)/S(3%), 시너지 시스템
 - **장르**: 브이로그(시작) → 게임(1K) → 먹방(5K) → 교육(20K) → 쇼츠(50K) → 다큐(200K)
-- **장비**: 카메라/PC/마이크/조명/태블릿, 각 3~5단계
+- **장비**: 카메라/PC/마이크/조명, 각 최대 Lv.10
 - **마일스톤**: 100 → 1K → 10K → 100K → 500K → 1M → 10M(엔딩)
 - **경쟁**: 주간 랭킹만 (가벼운 보상), PvP 없음
 
@@ -59,30 +60,27 @@
 2. **Phase 2 - 수집&육성**: 가챠, 레벨업/돌파, 장비, 장르 확장
 3. **Phase 3 - 경쟁&수익화**: 랭킹, 광고 보상, 인앱 결제, 마일스톤
 
-## 현재 상태 (2026-02-11)
+## 현재 상태 (2026-02-12)
 - 데이터 모델 스캐폴딩 완료 (PlayerData, CharacterData, ContentData, EquipmentData)
 - 매니저 로직 스캐폴딩 완료 (DataManager, CharacterManager, ContentManager, EquipmentManager, StudioManager)
 - GameManager 싱글톤 구조 생성
-- **Network 모듈 구현 완료 (통합)**:
-  - `Network/APIClient.cs`: 올인원 REST API 클라이언트
-    - 인증: Register, Login (JWT 토큰 자동 저장/로드)
-    - 플레이어: GetPlayerData, SavePlayerData
-    - 가챠: DrawGacha
-    - 캐릭터: GetAllCharacters, LevelUp, Breakthrough
-    - 콘텐츠: StartContent, GetProducing, Complete, Upload, History
-    - 모든 DTO 클래스 포함 (AuthResponse, GachaResponse, ContentResponse 등)
-- **UI 스크립트 (완성)**:
-  - `UI/LoginUI.cs`: 로그인/회원가입 UI, 자동 로그인 지원
-  - `UI/MainStudioUI.cs`: 메인 스튜디오 화면
-  - `UI/ContentProductionUI.cs`: 콘텐츠 제작 UI
-  - `UI/CharacterListUI.cs`: 캐릭터 목록, 등급 필터, 상세 보기, 레벨업/돌파 UI
-- 씬, 프리팹은 Unity 에디터에서 작업 필요 (TextMeshPro, Button, InputField)
+- **Network 모듈 구현 완료**:
+  - `Network/APIClient.cs`: 올인원 REST API 클라이언트 (인증, 플레이어, 가챠, 캐릭터, 콘텐츠, 장비, 랭킹)
+- **UI 스크립트 전체 구현**:
+  - `UI/LoginScreen.cs`: 로그인/회원가입, 자동 로그인
+  - `UI/MainScreen.cs`: 메인 스튜디오 화면, 콘텐츠 제작/업로드, 타이머
+  - `UI/CharacterListScreen.cs`: 캐릭터 목록, 등급 필터, 레벨업/돌파
+  - `UI/EquipmentScreen.cs`: 장비 업그레이드 (카메라/PC/마이크/조명)
+  - `UI/GachaScreen.cs`: 가챠 1회/10회, 티켓/보석 전환
+  - `UI/ContentHistoryScreen.cs`: 콘텐츠 히스토리, 정렬, 통계
+  - `UI/RankingScreen.cs`: 주간/채널파워 랭킹
+- 씬, 프리팹은 Unity 에디터에서 작업 필요
 
 ## 다음 작업 (TODO)
 - Unity 에디터: Login 씬, Main 씬 생성
-- Unity 에디터: UI 프리팹 생성 및 스크립트 연결 (CharacterCard 프리팹 등)
+- Unity 에디터: UI 프리팹 생성 및 스크립트 연결
 - Unity 에디터: Resources/ApiConfig ScriptableObject 에셋 생성
-- 장비 UI, 가챠 UI 스크립트 (CharacterListUI 완료)
+- 서버 DB 구축 (Oracle Cloud + MySQL) → 집에서 작업
 
 ## 코드 컨벤션
 - C# 네이밍: PascalCase (public), _camelCase (private field)
