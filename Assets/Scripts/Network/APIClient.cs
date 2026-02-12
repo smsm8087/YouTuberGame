@@ -146,6 +146,18 @@ public class APIClient : MonoBehaviour
         yield return Get("/rankings/channel-power", callback);
     }
 
+    // 마스터 데이터 버전 확인
+    public IEnumerator GetMasterDataVersion(System.Action<bool, string> callback)
+    {
+        yield return Get("/master-data/version", callback);
+    }
+
+    // 마스터 데이터 전체 조회
+    public IEnumerator GetMasterData(System.Action<bool, string> callback)
+    {
+        yield return Get("/master-data", callback);
+    }
+
     // HTTP 헬퍼
     private IEnumerator Get(string endpoint, System.Action<bool, string> callback)
     {
