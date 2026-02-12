@@ -94,10 +94,10 @@ public class APIClient : MonoBehaviour
         yield return Post("/gacha/draw", data, true, callback);
     }
 
-    // 캐릭터 목록 조회
+    // 캐릭터 목록 조회 (인증 불필요 - 도감)
     public IEnumerator GetAllCharacters(Action<bool, string> callback)
     {
-        yield return Get("/characters", callback);
+        yield return Get("/characters", callback, false);
     }
 
     // 캐릭터 레벨업
@@ -120,9 +120,9 @@ public class APIClient : MonoBehaviour
     }
 
     // 콘텐츠 제작 시작
-    public IEnumerator StartContent(string title, string genre, Action<bool, string> callback)
+    public IEnumerator StartContent(string title, string genre, string[] assignedCharacterInstanceIds, Action<bool, string> callback)
     {
-        var data = new { Title = title, Genre = genre };
+        var data = new { Title = title, Genre = genre, AssignedCharacterInstanceIds = assignedCharacterInstanceIds };
         yield return Post("/content/start", data, true, callback);
     }
 
@@ -162,27 +162,27 @@ public class APIClient : MonoBehaviour
         yield return Get("/rankings/channel-power", callback);
     }
 
-    // 마스터 데이터 버전 확인
+    // 마스터 데이터 버전 확인 (인증 불필요 - 앱 시작 시 로그인 전 호출)
     public IEnumerator GetMasterDataVersion(Action<bool, string> callback)
     {
-        yield return Get("/master-data/version", callback);
+        yield return Get("/master-data/version", callback, false);
     }
 
-    // 마스터 데이터 전체 조회
+    // 마스터 데이터 전체 조회 (인증 불필요 - 앱 시작 시 로그인 전 호출)
     public IEnumerator GetMasterData(Action<bool, string> callback)
     {
-        yield return Get("/master-data", callback);
+        yield return Get("/master-data", callback, false);
     }
 
     // ───── HTTP 헬퍼 ─────
 
-    private IEnumerator Get(string endpoint, Action<bool, string> callback)
+    private IEnumerator Get(string endpoint, Action<bool, string> callback, bool auth = true)
     {
         using (UnityWebRequest req = UnityWebRequest.Get(apiUrl + endpoint))
         {
             req.timeout = 10;
 
-            if (!string.IsNullOrEmpty(_authToken))
+            if (auth && !string.IsNullOrEmpty(_authToken))
                 req.SetRequestHeader("Authorization", "Bearer " + _authToken);
 
             yield return req.SendWebRequest();
