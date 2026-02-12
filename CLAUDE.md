@@ -64,7 +64,7 @@
 3. **Phase 3 - 경쟁&수익화**: 랭킹, 광고 보상, 인앱 결제, 마일스톤
 
 ## UI 아키텍처
-DinoMutation 프로젝트의 검증된 패턴을 적용:
+Enum 바인딩 + 팝업 스택 패턴:
 
 ### 기반 클래스
 - `UI/Base/UI_Base.cs`: Enum 기반 컴포넌트 바인딩 (Bind<T>, GetButton, GetText 등)
